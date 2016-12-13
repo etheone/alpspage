@@ -1,0 +1,166 @@
+/*----------------------*/ 
+/*   FILTER             */ 
+/*----------------------*/
+
+.filters-wrap
+	margin 0
+	text-align center
+	a
+		display inline-block
+		margin 0 6px 6px 6px
+		font-size 13px
+		text-transform uppercase
+		padding 5px 10px 5px 12px
+		cursor pointer
+		line-height 1em
+		letter-spacing 2px
+		transition $transition
+		&:hover
+			color $black
+		&.active
+			background-color $lgray
+			color $black
+
+.filters-wrap + .portfolio-masonry-wrapper
+	margin-top 40px
+
+/*----------------------*/ 
+/*   PORTFOLIO          */ 
+/*----------------------*/
+
+.portfolio-item-wrap,
+.portfolio-item
+	position relative
+	overflow hidden
+
+.portfolio-content-wrap, 
+.portfolio-title,
+.portfolio-categories
+	transition $transition
+	white-space nowrap
+	webkit-font-smoothing antialiased
+	-khtml-font-smoothing antialiased
+	-apple-font-smoothing antialiased
+	
+.portfolio-img
+	position relative
+	overflow hidden
+	&::before
+		content ''
+		position absolute
+		top 0
+		left 0
+		height 100%
+		width 100%
+		background-color rgba($lwhite, 95%)
+		z-index 1
+		opacity 0
+		transition all .25s ease-in-out
+		
+.portfolio-content-wrap
+	position absolute
+	overflow hidden
+	top 0
+	left 0
+	height 100%
+	width 100%
+	z-index 2
+	&::after 
+		content ''
+		height 100%
+		display inline-block
+		width 0
+		vertical-align middle
+		font-size 0
+	
+.potfolio-content
+	width 100%
+	text-align center
+	display inline-block
+	vertical-align middle
+
+
+.portfolio-categories,
+.portfolio-title
+	opacity 0
+
+.portfolio-categories
+	transform translateY(8px)
+	font-size 12px
+	font-style italic
+	letter-spacing 2px
+
+.portfolio-title
+	text-transform uppercase
+	letter-spacing 2px
+	color $black
+	transform translateY(-8px)
+
+.portfolio-item:hover
+	.portfolio-categories,
+	.portfolio-title
+		opacity 1
+		transform translateY(0)
+	.portfolio-img::before
+		opacity 1
+
+.classic-load-button,
+.infinite-load
+	padding-top 50px
+	text-transform uppercase
+	font-weight 600
+	font-size 14px
+	letter-spacing 2px
+
+.classic-load-button p.end,
+.infinite-load
+	display none
+
+.infinite-load a
+	display none !important
+
+
+/*----------------------*/ 
+/*   EQUALGRID PORTFOLIO*/ 
+/*----------------------*/
+
+$percent = 80%
+
+.equal-grid
+	&.portfolio-masonry-wrapper
+		margin-left -30px !important
+		margin-right -30px !important
+	.portfolio-img
+		background-size cover
+		background-position center center
+		background-repeat no-repeat
+		padding-top $percent
+		&.large
+			padding-top $percent * 2
+
+/*----------------------*/ 
+/*   PORTFOLIO GRID     */ 
+/*----------------------*/
+
+.portfolio-masonry-wrapper .portfolio-item-wrap
+	float left
+
+.portfolio-masonry-wrapper[data-col="2"] .portfolio-item-wrap
+	width 50%
+	
+.portfolio-masonry-wrapper[data-col="3"] .portfolio-item-wrap
+	width 33.333%
+	
+.portfolio-masonry-wrapper[data-col="4"] .portfolio-item-wrap
+	width 25%
+
+@media (max-width: 768px)
+	.portfolio-masonry-wrapper[data-col="3"] .portfolio-item-wrap,
+	.portfolio-masonry-wrapper[data-col="4"] .portfolio-item-wrap
+		width 50%
+
+@media (max-width: 544px)
+	.portfolio-masonry-wrapper[data-col="2"] .portfolio-item-wrap,
+	.portfolio-masonry-wrapper[data-col="3"] .portfolio-item-wrap,
+	.portfolio-masonry-wrapper[data-col="4"] .portfolio-item-wrap
+		width 100%

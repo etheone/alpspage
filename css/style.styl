@@ -1,0 +1,336 @@
+/*----------------------*/ 
+/*   IMPORT FONTS       */ 
+/*----------------------*/
+@import url('https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy')
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600')
+
+$f1 = 'Source Sans Pro', sans-serif
+$f2 = 'Sorts Mill Goudy', serif
+
+$white = #ffffff
+$lwhite = #fcfcfc
+$border = #f4f4f4
+$black = #222222
+$lblack = #2b2b2b
+$gray = #666666
+$lgray = #efefef
+$llgray = #f4f4f4
+$text = #555555
+$red = #fb3b3b
+$transition = all .4s ease-in-out
+
+
+/*----------------------*/ 
+/*   GENERAL            */ 
+/*----------------------*/
+	
+body
+	background-color $white
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	position relative
+	min-width 320px
+	font-family $f1
+	line-height 1.8
+	font-size 15px
+	letter-spacing 0.02em
+	color $text
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6
+	padding 0
+	margin 0
+	margin-bottom 5px
+	color $black
+	font-weight 400
+	line-height 1.7em
+	letter-spacing 1px
+	text-transform uppercase
+
+h1, .h1
+	font-size 44px
+
+h2, .h2
+	font-size 36px
+
+h3, .h3
+	font-size 28px
+	
+h4, .h4
+	font-size 24px
+	
+h5, .h5
+	font-size 18px
+	
+h6, .h6
+	font-size 15px
+
+img
+	max-width 100%
+	height auto
+
+img.align-left
+	margin 0 20px 20px 0
+	
+img.align-right
+	margin 0 0 20px 20px
+
+p
+	margin 0 0 20px 0
+
+b, strong, .bold
+	font-weight 600
+			
+a
+	transition $transition
+	text-decoration none
+	color $black
+	&:hover, &:focus
+		text-decoration none
+		outline none
+		color rgba($black, 70%)
+
+
+ul
+	list-style square outside none
+
+ol
+	list-style decimal outside none
+
+	
+ul, ol	
+	padding 0 0 0 20px
+	&.list-none
+		list-style none
+		padding 0
+		
+blockquote
+	padding 25px
+	color $black
+	font-family $f2
+	font-size 18px
+	line-height 1.5em
+	margin-top 30px
+	letter-spacing 0
+	border-left 5px solid $lgray
+	
+cite
+	font-size 10px
+	display block
+	font-weight 700
+	color $black
+	line-height 1.5em
+	text-transform uppercase
+	letter-spacing 0.25em
+	font-family $f1
+	font-style normal
+	margin-top 20px
+
+pre
+	overflow auto
+	clear both
+	position relative
+	max-width 100%
+	margin 0 0 20px 0
+	background-color $llgray
+	padding 20px 40px 20px 20px
+	font-family monospace
+	white-space pre-wrap
+	color inherit
+	&::after
+		content '\f121'
+		position absolute
+		padding 2px 0 0 0
+		width 20px
+		top 0
+		right 0
+		height 100%
+		font-size 10px
+		background-color $black
+		color $white
+		font-family 'FontAwesome'
+		text-align center
+
+dl
+	margin-bottom 20px
+	
+dt
+	font-weight 600
+	color $black
+	text-transform uppercase
+	font-size 14px
+
+dd
+	margin-bottom 7px
+
+table
+	width 100%
+	max-width 100%
+	margin 0 0 20px 0
+	
+th, caption
+	background-color $black
+	color $white
+	text-transform uppercase
+	letter-spacing 1px
+	font-weight 400
+
+th, td
+	padding 10px 15px
+	font-size 13px
+
+tr:nth-child(odd)
+	background-color $llgray
+		
+placeholder()
+	&::-webkit-input-placeholder 
+		font-size 13px
+		color #aaaaaa
+		letter-spacing 1px
+	&:-moz-placeholder  /* Firefox 18- */
+		font-size 13px
+		color #aaaaaa
+		letter-spacing 1px
+	&::-moz-placeholder  /* Firefox 19+ */
+		font-size 13px
+		color #aaaaaa
+		letter-spacing 1px
+	&:-ms-input-placeholder  
+		font-size 13px
+		color #aaaaaa
+		letter-spacing 1px
+		
+label
+	display block
+	font-size 13px
+	font-weight 600
+	color $black
+	letter-spacing 1px
+	line-height normal
+	margin-bottom 6px
+	span
+		color $red
+		font-size 15px
+		
+input, textarea
+	placeholder()
+
+input,
+textarea,
+select
+	padding 0
+	font-size 13px
+	background-color transparent
+	border none
+	border-bottom 1px solid $gray
+	border-radius 0
+	width 100%
+	display block
+	box-shadow none
+	outline none
+	margin-top 10px
+	margin-bottom 20px
+	padding-bottom 10px
+	letter-spacing 1px
+
+select
+	appearance none
+	-webkit-appearance none
+	-moz-appearance none
+	background transparent url('../img/select_bg.png') no-repeat 100% 35%
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus
+	outline none
+
+textarea
+	max-width 100%
+
+
+/*----------------------*/ 
+/*   PAGE-TITLE         */ 
+/*----------------------*/
+
+.page-title
+	padding 75px
+	text-align center
+	background-color rgba($lwhite, 93%)
+	h1
+		font-size 31px
+		line-height 1.4em
+		letter-spacing 4px
+		padding-left 4px
+	p
+		font-size 13px
+		margin-top 12px
+		text-transform uppercase
+		letter-spacing 0.2em
+		margin-bottom 0
+
+@media (max-width: 768px)
+	.page-title
+		padding 55px
+		h1
+			font-size 28px
+			
+@media (max-width: 544px)
+	.page-title
+		padding 40px
+		h1
+			font-size 22px
+
+/*----------------------*/ 
+/*   FOOTER             */ 
+/*----------------------*/
+
+.content
+	z-index 1
+	position relative
+	background-color $white
+
+footer
+	width 100%
+
+.footer
+	background-color $lgray
+	width 100%
+	padding 60px 0
+
+p.copy
+	margin-top 30px
+	color #777
+	span
+		color $black
+
+.footer-menu, 
+.footer-social
+	list-style-type none
+	margin 0
+	padding 0
+	display inline-block
+	margin-top 30px
+	li
+		display inline-block
+		margin 0 8px
+		a
+			text-transform uppercase
+			font-size 13px
+			letter-spacing 1px
+			color rgba($black, .7)
+			&:hover
+				color $black
+
+@media (max-width: 768px)
+	footer
+		position relative !important
+
+
+@import 'elements/menu.styl'
+@import 'elements/blog.styl'
+@import 'elements/sidebar.styl'
+@import 'elements/comments.styl'
+@import 'elements/portfolio.styl'
+@import 'elements/shortcodes.styl'
+@import 'elements/additional.styl'

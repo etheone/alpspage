@@ -1,0 +1,533 @@
+/*----------------------*/ 
+/*   SELECTION          */ 
+/*----------------------*/
+
+::-moz-selection
+	background $lblack
+	color $lwhite
+
+::selection
+	background $lblack
+	color $lwhite
+
+
+/*----------------------*/ 
+/*   ADDITIONAL         */ 
+/*----------------------*/
+
+.cwhite
+	color $lwhite
+
+.section-gray
+	background-color lighten($lgray, 75%)
+
+main
+	padding 40px 0
+	
+.jarallax,
+.section
+	position relative
+	background-size cover
+	background-position center center
+	background-repeat no-repeat
+	overflow hidden
+
+.section
+	padding 50px 0
+	&::after
+		content ''
+		clear both
+		display table
+
+.aligner
+	display -webkit-box
+	display -webkit-flex
+	display -ms-flexbox
+	display flex
+	-webkit-box-align center
+	-webkit-align-items center
+	-ms-flex-align center
+	align-items center
+	-webkit-box-pack center
+	-webkit-justify-content center
+	-ms-flex-pack center
+	justify-content center
+	min-height 80vh
+	padding 80px 0
+	
+.header-fixed .aligner
+	min-height 95vh
+	padding 170px 0 80px 0
+
+.aligner-item
+	-webkit-box-flex 0
+	-webkit-flex none
+	-ms-flex none
+	flex none
+	max-width 100%
+	min-width 40%
+
+/*----------------------*/ 
+/*   PRELOADER          */ 
+/*----------------------*/
+
+$circleOne = 80px
+$circleTwo = 60px
+
+.preloader
+	position fixed
+	top 50%
+	left 50%
+	height $circleOne
+	width $circleOne
+	margin-top -($circleOne/2)
+	margin-left -($circleOne/2)
+	z-index 9999
+	&::before, &::after
+		content ''
+		display block
+		position absolute
+		border-radius 50%
+		background-color $lwhite
+		top 50%
+		left 50%
+	&::before
+		height $circleOne
+		width $circleOne
+		margin-left -($circleOne/2)
+		margin-top -($circleOne/2)
+		box-shadow 0px -4px 8px 0px rgba(0, 0, 0, 0.08)
+		animation spinTwo 3s infinite	
+	&::after
+		height $circleTwo
+		width $circleTwo
+		margin-left -($circleTwo/2)
+		margin-top -($circleTwo/2)
+		box-shadow 0px -4px 8px 0px rgba(0, 0, 0, 0.08)
+		animation spinTwo 5s infinite
+
+@keyframes spinOne
+	100%
+		transform rotate(360deg)
+
+@keyframes spinTwo
+	100%
+		transform rotate(-360deg)
+
+/*----------------------*/ 
+/*   SCROLL-TO-TOP      */ 
+/*----------------------*/
+
+.scroll-top
+	position fixed
+	width 40px
+	height 40px
+	text-align center
+	line-height 40px
+	right 30px
+	bottom 30px
+	z-index 16
+	font-size 13px
+	background-color $black
+	color $lwhite
+	transition $transition
+	&:hover i
+		animation animateIconTop .4s forwards
+	&:hover, &:focus
+		background-color $black
+		color $lwhite
+	i
+		color inherit
+		display inline-block
+	&-visible
+		opacity 1
+		transform translateX(0)
+	&-hidden
+		opacity 0
+		transform translateX(20px)
+
+@media (max-width: 544px)
+	.scroll-top
+		display none
+
+/*----------------------*/ 
+/*   FANCYBOX           */ 
+/*----------------------*/
+
+.fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp
+	padding 0
+	margin 0
+	border 0
+	outline none
+	vertical-align top
+
+.fancybox-wrap
+	position absolute
+	top 0
+	left 0
+	z-index 8020
+
+.fancybox-skin
+	position relative
+
+.fancybox-opened
+	z-index 8030
+
+.fancybox-outer, .fancybox-inner
+	position relative
+
+.fancybox-inner
+	overflow hidden
+
+.fancybox-type-iframe
+	.fancybox-inner
+		-webkit-overflow-scrolling touch
+
+.fancybox-error
+	font-size 12px
+	text-transform uppercase
+	letter-spacing 2px
+	color $red
+
+.fancybox-image, .fancybox-iframe
+	display block
+	width 100%
+	height 100%
+
+.fancybox-image
+	max-width 100%
+	max-height 100%
+
+#fancybox-loading
+	position fixed
+	top 50%
+	left 50%
+	margin-top -20px
+	margin-left -20px
+	z-index 8060
+	
+#fancybox-loading div
+	width 40px
+	width 40px
+	background-color rgba($lwhite, 90%)
+	text-align center
+	line-height 40px
+	&::before
+		content '/f110'
+		font-family 'FontAwesome'
+		animation fa-spin 2s infinite
+
+.fancybox-nav
+	position absolute
+	top 0
+	width 40%
+	height 100%
+	cursor pointer
+	z-index 8040
+	span
+		position absolute
+		top 50%
+		height 40px
+		width 40px
+		background-color $lwhite
+		color $black
+		font-size 14px
+		text-align center
+		line-height 40px
+		margin-top -20px
+		cursor pointer
+		z-index 8040
+		opacity 0
+		transition all .2s ease-in-out
+		&:hover
+			opacity 1
+
+.fancybox-prev 
+	left 0
+	span
+		left -20px
+		&::after
+			content '\f104'
+			font-family 'FontAwesome'
+	&:hover
+		span
+			left 0
+			opacity .9
+			
+.fancybox-next 
+	right 0
+	span
+		right -20px
+		&::after
+			content '\f105'
+			font-family 'FontAwesome'
+	&:hover
+		span
+			right 0
+			opacity .9
+
+.fancybox-tmp
+	position absolute
+	top -99999px
+	left -99999px
+	visibility hidden
+	max-width 99999px
+	max-height 99999px
+	overflow visible !important
+
+.fancybox-lock
+	overflow hidden !important
+	width auto
+	max-width 100%
+	body
+		overflow hidden !important
+	.fancybox-overlay
+		overflow auto
+		overflow-y scroll
+
+.fancybox-lock-test
+	overflow-y hidden !important
+
+.fancybox-overlay
+	position absolute
+	top 0
+	left 0
+	overflow hidden
+	display none
+	z-index 8010
+	background-color rgba($lwhite, 90%)
+
+.fancybox-overlay-fixed
+	position fixed
+	bottom 0
+	right 0
+
+.fancybox-title
+	display block
+	padding-top 10px
+	font-size 13px
+	letter-spacing 2px
+	text-transform uppercase
+	color $black
+	z-index 8050
+	text-align center
+	font-family $f1
+
+/*----------------------*/ 
+/*   TOOLTIP            */ 
+/*----------------------*/
+
+.vl-tooltip
+	border-radius 1px
+	border none
+	background-color $black
+	color rgba($lwhite, 95%)
+
+.vl-tooltip .tooltipster-content
+	font-family $f1
+	font-size 11px
+	line-height 1.8em
+	text-transform uppercase
+	letter-spacing 3px
+	padding 3px 10px 3px 13px
+
+
+/*----------------------*/ 
+/*   FLEXSLIDER         */ 
+/*----------------------*/
+
+	
+.flexslider ul
+	margin 0
+	padding 0
+	list-style-type none
+	&::after
+		display table
+		clear both
+		content ''		
+
+.flex-prev,
+.flex-next
+	position absolute
+	top 50%
+	margin-top -20px
+	opacity 0
+	z-index 55
+	height 40px
+	width 40px
+	background-color $lwhite
+	color $black
+	font-size 14px
+	text-align center
+	line-height 40px
+	&:hover
+		opacity 1
+	&:active
+		opacity .7
+
+.flex-prev
+	left -10px
+	&::after
+		content '\f104'
+		font-family 'FontAwesome'
+.flex-next
+	right -10px
+	&::after
+		content '\f105'
+		font-family 'FontAwesome'
+
+.flexslider
+	overflow hidden
+	&:hover	
+		.flex-prev,
+		.flex-next
+			opacity .9
+		.flex-prev
+			left 0
+		.flex-next
+			right 0
+
+.image-slider-wrap
+	overflow hidden
+	position relative
+	text-align center
+	margin-bottom 20px
+	.blind-01, 
+	.blind-02
+		position absolute
+		top 0
+		left 0
+		height 100%
+		width 100%
+		transform translateX(-100%)
+	.blind-01
+		background-color $lgray
+		z-index 40
+	.blind-02
+		background-color $black
+		z-index 45	
+	.flex-control-nav
+		display inline-block
+		list-style-type none
+		padding 0
+		margin 0
+		li
+			float left
+			margin 0 6px
+			a
+				height 4px
+				width 4px
+				display block
+				border none
+				border-radius 50%
+				box-shadow 0 1px 1px 0px rgba($lblack, 10%)
+				background-color rgba($lblack, 20%)
+				text-indent 9999px
+				&.flex-active
+					background-color rgba($lblack,.9)
+					
+
+/*----------------------*/ 
+/*   SWIPER PAGINATION  */ 
+/*----------------------*/
+
+.swiper-pagination-bullet
+	height 4px
+	width 4px
+	display block
+	border none
+	border-radius 50%
+	background-color rgba($lwhite, 50%)
+
+.swiper-pagination-bullet-active
+	background-color $white
+
+.swiper-pagination-bullets span
+	display inline-block
+	margin 0 6px
+
+
+/*----------------------*/ 
+/*   PAGINATION         */ 
+/*----------------------*/
+
+.page-navigation
+	display inline-block
+	position relative
+	margin 0
+	padding 0
+	margin-top 90px
+	padding-top 50px
+	list-style-type none
+	&::after
+		content ''
+		display block
+		width 30px
+		height 2px
+		background-color $black
+		position absolute
+		top 0
+		left 50%
+		margin-left -15px
+	li
+		float left
+		margin 0 3px
+		min-width 40px
+		min-height 40px
+		background-color $lgray
+		a
+			height 40px
+			width 40px
+			line-height 40px
+			font-size 14px
+			text-align center
+			display block
+			float left
+			position relative
+			color $text			
+			i
+				position relative
+				z-index 2
+			span
+				position absolute
+				z-index 0
+				display inline-block
+				text-transform uppercase
+				text-align center
+				background-color $black
+				height 100%
+				right 0
+				letter-spacing 1.5px
+				width (70px+40px)
+				padding-right 40px
+				line-height 40px
+				margin-left 0
+				transition transform .4s ease
+				transform scaleX(0)
+				transform-origin 100% 50%
+			&.nav-right
+				span
+					left 0
+					padding-left 40px
+					padding-right 0
+					transform-origin 0 50%
+			&:hover, &.active
+				color $white
+				span
+					transform scaleX(1)
+	
+/*----------------------*/ 
+/*   PAGE 404           */ 
+/*----------------------*/
+
+.error404 .aligner
+	min-height 100vh

@@ -1,0 +1,200 @@
+/*----------------------*/ 
+/*   LOGO               */ 
+/*----------------------*/
+
+.logo
+	font-size 18px
+	line-height 1em
+	text-transform uppercase
+	color $black
+	letter-spacing 4px
+	> span
+		position relative
+		display inline-block
+		transition $transition
+		transform-origin 50% 100%
+	&:hover
+		color $black
+		> span
+			transform rotateY(180deg)
+
+
+
+/*----------------------*/ 
+/*   HEADER             */ 
+/*----------------------*/
+
+.header-fixed .header-wrap
+	position fixed !important
+
+.header-wrap.no-transparent
+	background-color $white
+	
+.header-fixed .header-wrap.no-transparent
+	background-color $white
+	
+.header-wrap
+	display table
+	top 0
+	left 0
+	width 100%
+	height 90px
+	z-index 555
+	transition transform 0.35s, opacity 0.35s, background-color 0.35s
+	.header-container
+		display table-cell
+		vertical-align middle
+
+.fixedheader.scroll-down .header-wrap
+	transform translateY(-85%)
+	opacity 0
+
+.fixedheader.scroll-up:not(.fullscreen-nav-open) .header-wrap:not(.no-transparent)
+	background-color $white
+
+// Fix Menu bg
+.fullscreen-nav-open 
+	.header-wrap
+		background-color transparent !important
+	.logo
+		color $white	
+
+body:not(.header-fixed) .fullscreen-menu-toggle
+	z-index 1001
+
+.fullscreen-menu-toggle	
+	position relative
+	color $black
+	font-size 14px
+	letter-spacing 3px
+	text-transform uppercase
+	> span
+		position relative
+		line-height 1em
+		opacity 0
+		left -10px
+		transition all .2s ease-in-out
+	> .menu-bars
+		margin-left 8px
+		
+.menu-bars
+	position relative
+	display inline-block
+	width 1em
+	height 1em
+	padding 0
+	margin-top -1px
+	vertical-align middle
+	> i
+		position absolute
+		left 0
+		width 1em
+		height 2px
+		display inline-block
+		transition all .4s ease-in-out
+		background-color $black
+		&:first-child
+			top 0
+		&:nth-child(2)
+			top 50%
+			margin-top -1px
+		&:last-child
+			top 100%
+			margin-top -2px
+	&.active
+		> i:first-child
+			transform rotate(-135deg)
+		> i:nth-child(2)
+			opacity 0			
+		> i:last-child
+			transform rotate(135deg)
+		> i:first-child,
+		> i:last-child
+			top 0
+			margin-top .333333em
+
+.fullscreen-nav-open
+	.fullscreen-menu-toggle
+		> span
+			color $lwhite
+			transition-delay .4s
+		> .menu-bars i
+			background-color $lwhite
+
+.fullscreen-nav-open .fullscreen-menu-toggle > span, 
+.fullscreen-menu-toggle:hover > span
+	opacity 1
+	left 0 
+
+#fullscreen-navigation
+	position fixed
+	top 0
+	left 0
+	width 100%
+	height 100%
+	display none
+	z-index 444
+	background-color rgba(#000, 90%)
+	> .inner-wrap
+		position absolute
+		top 50%
+		left 0
+		width 100%
+		max-height 100%
+		overflow-y auto
+		text-align center
+		padding 50px 0
+		transform translateY(-50%)
+
+
+#fullscreen-navigation > .inner-wrap > nav > .nav_menu,
+#fullscreen-navigation > .inner-wrap > nav > .nav_menu ul
+	margin 0
+	padding 0 0 5px 0
+	list-style-type none
+
+#fullscreen-navigation .nav_menu 
+	a
+		display inline-block
+		padding 4px 0
+		font-size 14px
+		text-transform uppercase
+		letter-spacing 1px
+		color #777
+		&:hover
+			color $lwhite
+
+#fullscreen-navigation .nav_menu .sub-menu
+	display none
+	a
+		text-transform capitalize
+		padding 2px 0
+		font-size 12px
+		letter-spacing 1px
+
+#fullscreen-navigation .nav_menu li.menu-item-has-children
+	> a::after
+		content '\f107'
+		font-family 'FontAwesome'
+		margin-left 4px
+	> a.sub-active
+		color $lwhite
+		&::after
+			content '\f106'
+
+#fullscreen-navigation li.current-menu-item > a,
+#fullscreen-navigation li.current-page-item > a
+	color $lwhite
+
+#fullscreen-navigation .socials
+	margin-top 25px
+	a
+		display inline-block
+		height 35px
+		width 35px
+		text-align center
+		line-height 35px
+		white-space nowrap
+		color #777
+		&:hover
+			color $white

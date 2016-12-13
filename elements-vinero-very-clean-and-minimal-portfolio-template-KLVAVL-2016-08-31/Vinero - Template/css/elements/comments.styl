@@ -1,0 +1,39 @@
+/*----------------------*/ 
+/*   COMMENTS           */ 
+/*----------------------*/
+
+.comments-list,
+.comments-list > li > ul
+	padding 0
+	margin 0
+	list-style-type none
+	
+.comment .depth-2
+	padding-left 50px
+	
+.comment-wrap
+	margin-bottom 50px
+
+.comment-wrap	
+	.avatar
+		margin-right 30px
+		&:hover
+			opacity .5
+		img
+			height 60px
+			width 60px
+			border-radius 50%
+			
+.comment-meta
+	margin-bottom 10px
+	.name
+		display inline-block
+		position relative
+		font-weight 600
+	.time
+		padding-left 15px
+		color #777
+
+@media (max-width: 768px)
+	.comment .depth-2
+		padding-left 0

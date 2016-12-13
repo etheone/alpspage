@@ -1,0 +1,31 @@
+Update v1.4
+
+1) Added equal grid portfolio layout
+2) Fixed contact form (return message)
+3) Added new elements (Team, Testimonial, Pricing Tables)
+4) Divided stylus files (blog.styl, portfolio.styl etc.)
+5) Fixed media queries
+
+
+Update v1.3
+
+1) Added fancybox portfolio layout
+2) Added gutter option (Portfolio)
+3) Fixed hover portfolio
+
+
+Update v1.2
+
+1) Added Page 404
+2) Added fixed menu (Scroll Up / Fixed)
+3) Changed design blog
+4) Fixed Load More Portfolio
+5) Fixed Responsive
+6) Fixed delay transparency in the footer
+
+
+Update v1.1
+
+1) Unique Pagination Effect
+2) Fixed Contact Form
+3) Fixed small bags
