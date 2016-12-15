@@ -58,7 +58,7 @@ app.use(express.static(__dirname));
 
 
 
-app.set('port', 8350);
+app.set('port', 3000);
 var server = http.createServer(app);
 server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
