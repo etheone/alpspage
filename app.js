@@ -18,6 +18,7 @@ app.use(session({
     secret: '!pretOr-50-YihA',
     resave: true,
     saveUninitialized: true,
+    cookie: { maxAge: 2592000000 }
 }));
 
 
@@ -57,7 +58,7 @@ app.use(express.static(__dirname));
 
 
 
-app.set('port', 3001);
+app.set('port', 8350);
 var server = http.createServer(app);
 server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
