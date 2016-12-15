@@ -35,6 +35,7 @@ app.use(express.static(__dirname));
 app.set('port', 3000);
 var server = http.createServer(app);
 server.listen(app.get('port'), "0.0.0.0", function () {
+    //addExistingImages();
     console.log('Dbserver listening on port ' + app.get('port'));
 });
 
@@ -59,17 +60,94 @@ app.post('/file-upload', function (req, res) {
             res.status(500).send(err);
         }
         else {
-            console.log("SUCCESS");
-            res.redirect('/');
+            //MANAGE TAGS AND FILE NAMES
+            Tag.findOne({ tagName: req.body.tag }, function (err, tag) {
+                if (err) {
+
+                } else {
+                    if (tag === null || tag === undefined) {
+                        tag = new Tag();
+                        tag.tagName = req.body.tag;
+                        tag.save();
+                        console.log("SUCCESS saving tag");
+                    }
+                }
+            });
+
+            imageToAdd = new Image();
+            image.imageName = req.files.file.name;
+            image.tags.push(req.body.tag);
+            image.save(function (err) {
+                if (err) {
+                    console.log("Failed to add image to db");
+                    console.log(err);
+                } else {
+                    console.log("saved image to db");
+                    res.redirect('/');
+                }
+            })
+
+
         }
     });
 
 });
 
+app.get('/tag-list', function(req, res) {
+
+    Tag.find({}, function(err, tags) {
+        if(err) {
+
+        } else {
+            res.send(tags);
+        }
+    });
+
+});
+
+app.get('/image-list', function (req, res) {
+    const testFolder = './uploads/';
+    const fs = require('fs');
+    Image.find({}, function(err, images) {
+        if(err) {
+
+        } else {
+            res.send(images);
+        }
+    });
+    /*fs.readdir(testFolder, (err, files) => {
+        res.send(files);
+    });*/
+
+});
+
 app.get('*', function (req, res) {
     console.log(req.url);
-    res.sendFile('index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 
 
+function addExistingImages()  {
+    const testFolder = __dirname + '/uploads/';
+    const fs = require('fs');
+    fs.readdir(testFolder, (err, files) => {
+        files.forEach(file => {
+            Image.findOne({imageName: file}, function(err, image) {
+                if(image === null || image === undefined) {
+                    var image = new Image();
+                    image.imageName = file;
+                    image.tags.push("test");
+                    image.save(function(err) {
+                        if(err) {
+                            console.log("error saving existing image");
+
+                        } else {
+                            console.log("saved existing image to db");
+                        }
+                    })
+                }
+            })
+        });
+    })
+}

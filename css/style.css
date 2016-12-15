@@ -909,6 +909,20 @@ body:not(.header-fixed) .fullscreen-menu-toggle {
   position: relative;
   overflow: hidden;
 }
+
+#imagelightbox
+{
+    position: fixed;
+    z-index: 9999;
+ 
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.portfolio-img img {
+  width: 98%;
+  margin-bottom: 8px;
+}
 .portfolio-img::before {
   content: '';
   position: absolute;

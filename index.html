@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!--<link rel="stylesheet" href="css/dropzone.css">-->
 	<link rel="stylesheet" href="css/basic.css">
+	<link rel="stylesheet" href="css/lightbox.css">
 
 	<!-- Plugins -->
 	<link rel="stylesheet" href="css/vlthemes.css">
@@ -91,194 +92,22 @@
 
 						<div class="filters-wrap">
 
-							<div class="text-center">
-								<a class="active" href="#" data-filter="*">all</a>
-								<a href="#" data-filter=".f_design">design</a>
-								<a href="#" data-filter=".f_branding">branding</a>
-								<a href="#" data-filter=".f_photo">photo</a>
+							<div class="text-center" id="tag-holder">
+								<a id="all-tag" class="active" href="#" data-filter="*">all</a>
 							</div>
 
 						</div>
 						<!-- End filters-wrap -->
 
 						<div class="portfolio-masonry-wrapper" data-col="3" data-gutter="30">
-							<div class="portfolio-list">
+							<div class="portfolio-list" id="all-images">
 
-								<article class="portfolio-item-wrap f_design">
-									<div class="portfolio-item">
 
-										<div class="portfolio-img">
-											<img src="img/ptf/1.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">
-															clay pots</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_branding">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/2.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Cereal</a>
-												</h6>
-												<div class="portfolio-categories">
-													Branding
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_photo">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/3.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Сlock</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_design">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/4.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Ceramic Bottle</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_photo">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/5.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Cat</a>
-												</h6>
-												<div class="portfolio-categories">
-													Photo
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_photo">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/6.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Lampe ballon</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_design">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/7.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">White Sneakers</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-								<!-- End portfolio-item-wrap -->
-
-								<article class="portfolio-item-wrap f_branding">
-
-									<div class="portfolio-item">
-										<div class="portfolio-img">
-											<img src="img/ptf/8.jpg" alt="">
-										</div>
-										<div class="portfolio-content-wrap">
-											<div class="potfolio-content">
-												<h6 class="portfolio-title">
-													<a href="work_single.html" class="animsition-link">Minimal Chair</a>
-												</h6>
-												<div class="portfolio-categories">
-													Design
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
 								<!-- End portfolio-item-wrap -->
 
 							</div>
 
-							<div class="classic-load-button text-center">
-								<p class="end">No More Projects</p>
-								<a id="classic-load-button-link" href="load_more.html" data-load="1">Load More</a>
-							</div>
+					
 
 						</div>
 
@@ -300,23 +129,8 @@
 			<div class="footer">
 				<div class="container">
 					<div class="text-center">
-						<a href="./" class="logo clearfix">viner<span>o</span>
+						<a href="./" class="logo clearfix">Zermatt <span>2016</span>
 							</a>
-
-						<ul class="footer-menu clearfix">
-							<li>
-								<a href="index.html" class="animsition-link">works</a>
-							</li>
-							<li>
-								<a href="shortcodes.html" class="animsition-link">Shortcodes</a>
-							</li>
-							<li>
-								<a href="blog_masonry.html" class="animsition-link">Blog</a>
-							</li>
-							<li>
-								<a href="contact.html" class="animsition-link">Contact</a>
-							</li>
-						</ul>
 						<!-- End footer-menu -->
 
 						<p class="copy">
@@ -339,8 +153,87 @@
 	<!-- Custom -->
 	<script src="vendors/vl_portfolio.js"></script>
 	<script src="scripts/script.js"></script>
+	<script src="vendors/jquery.lazyload.js"></script>
+	<script src="vendors/lightbox.js"></script>
 	<script>
 
+	jQuery(function() {
+		jQuery("img.lazy").lazyload();
+	});
+
+	var images = 15;
+
+	function loadImage(tag, imageName) {
+		jQuery("#all-images").append('<article class="portfolio-item-wrap f_' + tag + '"><div class="portfolio-item"><div class="portfolio-img"><img class="lazy" src="uploads/' + imageName + '" alt=""></div><div class="portfolio-content-wrap"><div class="potfolio-content"><h6 class="portfolio-title"><a href="uploads/'+ imageName + '" data-lightbox="' + tag + '">Click to enlarge</a></h6><div class="portfolio-categories">' + tag + '</div></div></div></div></article>');
+	}
+
+	function loadTags(tag) {
+		console.log("doing it");
+		jQuery('#tag-holder').append('<a href="#" data-filter=".f_' + tag + '">' + tag + '</a>')
+	}
+
+
+
+	jQuery(document).ready(function() {
+		console.log("tjena");
+
+		jQuery.get("/tag-list", function(data) {
+
+			/*jQuery.each(data, function(index, value) {
+				var tag = value['tagName'];
+				console.log(tag);
+				loadTags(tag);
+			})
+			console.log(data);*/
+
+			jQuery.when.apply(jQuery, data.map(function(value, index) {
+				var tag = value['tagName'];
+				console.log(tag);
+				loadTags(tag);
+			})).then(function() {
+				init_portfolio();
+			});
+
+		});
+
+		jQuery.get("/image-list", function(data) {
+
+			jQuery.when.apply(jQuery, data.map(function(value, index) {
+				//console.log("index");
+				//console.log(index);
+				//console.log("value");
+				//console.log(value);
+				var tag = value['tags'][0];
+				var imageName = value['imageName'];
+				loadImage(tag, imageName);
+			})).then(function() {
+				setTimeout(function() {
+					jQuery('#all-tag').click();
+				}, 200);
+				
+			});
+
+			/*jQuery.each(data, function(index, value) {
+				//console.log("index");
+				//console.log(index);
+				//console.log("value");
+				//console.log(value);
+				var tag = value['tags'][0];
+				var imageName = value['imageName'];
+				loadImage(tag, imageName);
+				
+			})*/
+			//console.log(data);
+
+	
+
+		});
+
+	
+
+	});
+
+	
  
   	jQuery("#my-awesome-dropzone").dropzone({
     init: function() {
