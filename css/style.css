@@ -1170,7 +1170,7 @@ body:not(.header-fixed) .fullscreen-menu-toggle {
   vertical-align: middle;
   position: relative;
   width: 60%;
-  background-color: $transparent;
+  background-color: transparent;
 }
 .progress-outer .progress-inner {
   height: 1px;

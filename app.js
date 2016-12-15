@@ -7,7 +7,29 @@ var http = require("http");
 var bodyParser = require('body-parser');
 var path = require('path');
 var fileUpload = require('express-fileupload');
+var session = require('express-session');
+var multer = require('multer');
+
+var upload = multer()
 //var Dropzone = require("dropzone");
+
+app.set('trust proxy', 1); // trust first proxy
+app.use(session({
+    secret: '!pretOr-50-YihA',
+    resave: true,
+    saveUninitialized: true,
+}));
+
+
+/*var auth = function(req, res, next) {
+  if (req.session && req.session.user === "user" && req.session.admin) {
+      console.log("auth next");
+    return next();
+  } else {
+    console.log("auth redirect");
+    return res.redirect('/login');
+  }
+};*/
 
 app.use(fileUpload());
 var Image = require('./imageSchema.js');
@@ -16,11 +38,13 @@ var Tag = require('./tagSchema.js');
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017");
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+/*
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());*/
 
 app.use(express.static(__dirname));
+
+
 
 //var files = fs.readdirSync(requiredDir);
 
@@ -32,11 +56,57 @@ app.use(express.static(__dirname));
 
 
 
-app.set('port', 3000);
+
+app.set('port', 3001);
 var server = http.createServer(app);
 server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
     console.log('Dbserver listening on port ' + app.get('port'));
+});
+
+var auth = function(req, res, next) {
+  if (req.session && req.session.user === "user" && req.session.admin) {
+      console.log("auth next");
+    return next();
+  } else {
+    console.log("auth redirect");
+    return res.redirect('/login');
+  }
+};
+
+app.get('/', function (req, res) {
+    console.log(req.session);
+    if(req.session.password) {
+        if(req.session.password == "AUTHED") {
+         res.sendFile(__dirname + '/index1.html');
+        } else {
+          res.redirect('/login');
+        }
+    //res.sendFile(__dirname + '/index.html');
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
+
+app.get('/login', function(req, res) {
+    res.sendFile(__dirname + '/login.html');
+});
+
+app.post('/loginn', upload.array(), function(req, res) {
+
+    //console.log(req.query.password);
+    var enteredPass = req.body.password;
+    if(enteredPass == "PEnsson50") {
+        req.session.password = "AUTHED";
+        console.log(req.session);
+        res.redirect('/');
+    } else {
+        res.redirect('/login');
+    }
+ 
+
 });
 
 app.post('/file-upload', function (req, res) {
@@ -120,16 +190,25 @@ app.get('/image-list', function (req, res) {
             res.send(images);
         }
     });
-    /*fs.readdir(testFolder, (err, files) => {
-        res.send(files);
-    });*/
 
 });
 
-app.get('*', function (req, res) {
-    console.log(req.url);
-    res.sendFile(__dirname + '/index.html');
-});
+
+
+  app.use(function(err, req, res, next){
+      if(err.status && err.status < 500) {
+        return res.status(400).send('Request Aborted');
+      }
+
+      console.log('Type of Error:', typeof err);
+      console.log('Error: ', err.stack);
+
+      if(req.xhr) {
+        res.send('500', { error: err });
+      } else {
+        res.send('500', { error: err });
+      }
+  });
 
 
 
