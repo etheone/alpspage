@@ -61,13 +61,18 @@ app.post('/file-upload', function (req, res) {
         }
         else {
             //MANAGE TAGS AND FILE NAMES
-            Tag.findOne({ tagName: req.body.tag }, function (err, tag) {
+            var tempTag = req.body.tag;
+            var tagToUse = tempTag.replace(/[^\w]/g,'');
+            console.log("TAAAAAG");
+            console.log(tempTag);
+            console.log(tagToUse);
+            Tag.findOne({ tagName: tagToUse }, function (err, tag) {
                 if (err) {
 
                 } else {
                     if (tag === null || tag === undefined) {
                         tag = new Tag();
-                        tag.tagName = req.body.tag;
+                        tag.tagName = tagToUse;
                         tag.save();
                         console.log("SUCCESS saving tag");
                     }
@@ -75,9 +80,9 @@ app.post('/file-upload', function (req, res) {
             });
 
             imageToAdd = new Image();
-            image.imageName = req.files.file.name;
-            image.tags.push(req.body.tag);
-            image.save(function (err) {
+            imageToAdd.imageName = req.files.file.name;
+            imageToAdd.tags.push(tagToUse);
+            imageToAdd.save(function (err) {
                 if (err) {
                     console.log("Failed to add image to db");
                     console.log(err);

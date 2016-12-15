@@ -63,7 +63,9 @@
 				<div class="inner-wrap">
 					<nav>
 						<div class="" id="dropzone" style="border: 2px dashed white; display:inline-block; color: white;">
-							<form action="/file-upload" class="dropzone needsclick dz-clickable" id="my-awesome-dropzone" style=" margin-bottom: 60px; margin-left: 30px; margin-top: 60px; margin-right: 30px;"><input id="tagField" name="tag" type="text" placeholder="Give your image a tag"></form>
+							<form action="/file-upload" class="dropzone needsclick dz-clickable" id="my-awesome-dropzone" style=" margin-bottom: 60px; margin-left: 30px; margin-top: 60px; margin-right: 30px;"><input id="tagField" name="tag" type="text" placeholder="Give your image a tag" required>
+							</form>
+							<button id="submit-button" style="background: rgba(0,0,0,0); border: 1px solid white; margin-bottom: 10px;" class="btn" disabled>Upload</button>
 						</div>
 					</nav>
 
@@ -155,13 +157,17 @@
 	<script src="scripts/script.js"></script>
 	<script src="vendors/jquery.lazyload.js"></script>
 	<script src="vendors/lightbox.js"></script>
+	<script src="scripts/jquery.validate.min.js"></script>
 	<script>
 
 	jQuery(function() {
 		jQuery("img.lazy").lazyload();
 	});
 
+	Dropzone.autoDiscover = false;
+	var myDropzone;
 	var images = 15;
+	var fileAdded = false;
 
 	function loadImage(tag, imageName) {
 		jQuery("#all-images").append('<article class="portfolio-item-wrap f_' + tag + '"><div class="portfolio-item"><div class="portfolio-img"><img class="lazy" src="uploads/' + imageName + '" alt=""></div><div class="portfolio-content-wrap"><div class="potfolio-content"><h6 class="portfolio-title"><a href="uploads/'+ imageName + '" data-lightbox="' + tag + '">Click to enlarge</a></h6><div class="portfolio-categories">' + tag + '</div></div></div></div></article>');
@@ -243,19 +249,51 @@
 		this.on('complete', function(file) {
 				setTimeout(function() {
 						myDropzone.removeAllFiles(true);
+						fileAdded = false;
 				  		jQuery("#fullscreen-navigation").hide();
 						jQuery("#tagField").val('');
 						location.reload();
 				}, 2000);
                 
-               });
+        });
+
+		this.on('addedfile', function(file) {
+			fileAdded = true;
+			 if (jQuery('#my-awesome-dropzone').valid() && fileAdded) {                   // checks form for validity
+            	jQuery('#submit-button').prop('disabled', false);        // enables button
+       		 } else {
+           		jQuery('#submit-button').prop('disabled', 'disabled');   // disables button
+       		 }
+		});
+		
     },
     paramName: "file",
     maxFiles : 1,
+	acceptedFiles: "image/jpeg,image/png,image/jpg",
 	autoProcessQueue: false
 });
 
+ jQuery('#my-awesome-dropzone').validate({
+        rules: {
+            tag: {
+                required: true
+            }
+        }
+    });
 
+    jQuery('#my-awesome-dropzone input').on('keyup blur', function () { // fires on every keyup & blur
+        if (jQuery('#my-awesome-dropzone').valid() && fileAdded) {                   // checks form for validity
+            jQuery('#submit-button').prop('disabled', false);        // enables button
+        } else {
+            jQuery('#submit-button').prop('disabled', 'disabled');   // disables button
+        }
+    });
+
+
+jQuery('#submit-button').on("click", function(){       
+	   
+  myDropzone.processQueue();
+});
 
 
 
