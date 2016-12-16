@@ -18,13 +18,6 @@ var upload = multer()
 //var Dropzone = require("dropzone");
 
 app.set('trust proxy', 1); // trust first proxy
-app.use(session({
-    secret: '!pretOr-50-YihA',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 2592000000 },
-    store: new MongoStore({'db': 'sessions', auto_reconnect: true })
-}));
 
 
 /*var auth = function(req, res, next) {
@@ -48,6 +41,19 @@ mongoose.connect("mongodb://localhost:27017");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());*/
 
+app.use(session({
+    secret: '!pretOr-50-YihA',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 2592000000 },
+        store: new MongoStore({
+            mongooseConnection: mongoose.connections[0],
+            collection: 'session',
+            auto_reconnect: true 
+    })
+}));
+
+
 app.use(express.static(__dirname));
 
 
@@ -62,14 +68,14 @@ app.use(express.static(__dirname));
 
 
 
-mongoose.connect.on('connected', function() {
+/*mongoose.connect.on('connected', function() {
     app.set('port', 3000);
     var server = http.createServer(app);
     server.listen(app.get('port'), "0.0.0.0", function () {
         //addExistingImages();
         console.log('Dbserver listening on port ' + app.get('port'));
     });
-});
+});*/
 
 app.set('port', 3000);
 var server = http.createServer(app);
