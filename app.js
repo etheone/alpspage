@@ -34,9 +34,18 @@ app.use(fileUpload());
 var Image = require('./imageSchema.js');
 var Tag = require('./tagSchema.js');
 
+var dbConfig = {
+ "db": "test",
+ "host": "localhost"
+}
+
+app.use(express.session({ 
+ secret: server_session_key
+ , store: new MongoStore(dbConfig)
+}));
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017");
+mongoose.connect("mongodb://localhost:27017", dbConfig);
 /*
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());*/
@@ -46,11 +55,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 2592000000 },
-        store: new MongoStore({
-            mongooseConnection: mongoose.connections[0],
-            collection: 'session',
-            auto_reconnect: true 
-    })
+        store: new MongoStore(dbConfig);
 }));
 
 
