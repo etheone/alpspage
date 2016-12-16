@@ -58,7 +58,11 @@ app.set('port', 3000);
 var server = http.createServer(app);
 app.use(express.static(__dirname));
 
-var store = new MongoStore('mongodb://localhost:27017/test', function(ret) {
+var options = {
+    url: 'mongodb://localhost:27017/test',
+    db: 'sessions'
+}
+var store = new MongoStore(options, function(ret) {
 
     server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
