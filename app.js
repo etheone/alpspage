@@ -9,6 +9,10 @@ var path = require('path');
 var fileUpload = require('express-fileupload');
 var session = require('express-session');
 var multer = require('multer');
+var MongoStore = require('connect-mongostore')(session);
+
+var exif = require('exif-parser');
+var lwip = require('lwip');
 
 var upload = multer()
 //var Dropzone = require("dropzone");
@@ -16,9 +20,10 @@ var upload = multer()
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
     secret: '!pretOr-50-YihA',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 2592000000 }
+    cookie: { maxAge: 2592000000 },
+    store: new MongoStore({'db': 'sessions' })
 }));
 
 
@@ -122,18 +127,19 @@ app.post('/file-upload', function (req, res) {
     console.log("SAMPLEFILE");
     console.log(req.files.file);
     console.log(req.files.file.name);
-    console.log(req);
+    console.log(req.files);
     sampleFile = req.files.file;
+
     sampleFile.mv(__dirname + '/uploads/' + sampleFile.name, function (err) {
         if (err) {
             console.log(err);
             console.log("ERROR");
             res.status(500).send(err);
-        }
-        else {
+        } else {
+            rotateImage(sampleFile.name);
             //MANAGE TAGS AND FILE NAMES
             var tempTag = req.body.tag;
-            var tagToUse = tempTag.replace(/[^\w]/g,'');
+            var tagToUse = tempTag.replace(/[^\wåäöÅÄÖ]/g,'');
             console.log("TAAAAAG");
             console.log(tempTag);
             console.log(tagToUse);
@@ -182,13 +188,11 @@ app.get('/tag-list', function(req, res) {
 });
 
 app.get('/image-list', function (req, res) {
-    const testFolder = './uploads/';
-    const fs = require('fs');
     Image.find({}, function(err, images) {
         if(err) {
 
         } else {
-            res.send(images);
+            res.send(images.reverse());
         }
     });
 
@@ -235,4 +239,62 @@ function addExistingImages()  {
             })
         });
     })
+}
+
+function rotateImage(imageName) {
+    // path is the path to your image
+    var pathToImage = __dirname + '/uploads/' + imageName;
+    var ext = imageName.substr(imageName.indexOf(".") + 1);
+    console.log("EXT");
+    console.log(ext);
+    fs.readFile(pathToImage, function (err, data) {
+        if (err) throw err;
+        var exifData = false;
+        // ext is the extension of the image
+        if(ext == "jpg" || ext == "jpeg" || ext == "JPG"){
+            exifData = exif.create(data).parse();
+        }
+        lwip.open(data, ext, function(err, image){
+            if(err) throw err;
+            if(exifData){
+                console.log("exifdata");
+                console.log(exifData);
+                switch( exifData.tags.Orientation ) {
+                    case 2:
+                    image = image.batch().flip('x'); // top-right - flip horizontal
+                    break;
+                    case 3:
+                    image = image.batch().rotate(180); // bottom-right - rotate 180
+                    break;
+                    case 4:
+                    image = image.batch().flip('y'); // bottom-left - flip vertically
+                    break;
+                    case 5:
+                    image = image.batch().rotate(90).flip('x'); // left-top - rotate 90 and flip horizontal
+                    break;
+                    case 6:
+                    image = image.batch().rotate(90); // right-top - rotate 90
+                    break;
+                    case 7:
+                    image = image.batch().rotate(270).flip('x'); // right-bottom - rotate 270 and flip horizontal
+                    break;
+                    case 8:
+                    image = image.batch().rotate(270); // left-bottom - rotate 270
+                    break;
+                }
+            } else {
+                image = image.batch();
+            }
+            image.writeFile(pathToImage, function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log("Wrote image to disk!");
+                }
+            });
+            
+            // image can now be used as per normal with batch
+            // eg. image.resize(200, 200)....
+        });
+    });
 }
