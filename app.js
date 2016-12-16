@@ -63,21 +63,11 @@ var options = {
     db: 'sessions'
 }
 
-const connection = mongoose.createConnection('mongodb://localhost:27017/test');
-
-var store = new MongoStore('mongodb://localhost:27017/test', function(ret) {
-
-});
-
-
-
 app.use(session({
     secret: '!pretOr-50-YihA',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 2592000000 },
-    db: 'sessions',
-    store: store
 }));
 
 /*
