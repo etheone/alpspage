@@ -63,7 +63,9 @@ var options = {
     db: 'sessions'
 }
 
-var store = new MongoStore({mongooseConnection:mongooseDatabase.connections[0]}, function(ret) {
+const connection = mongoose.createConnection('mongodb://localhost:27017/test');
+
+var store = new MongoStore({conncetion: connection, db:'sessions'}, function(ret) {
 
     server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
@@ -78,6 +80,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 2592000000 },
+    db: 'sessions',
     store: store
 }));
 
