@@ -39,17 +39,12 @@ var dbConfig = {
  "host": "localhost"
 }
 
-app.use(express.session({ 
- secret: server_session_key
- , store: new MongoStore(dbConfig)
-}));
-
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017", dbConfig);
+mongoose.connect("mongodb://localhost:27017");
 /*
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());*/
-
+/*
 app.use(session({
     secret: '!pretOr-50-YihA',
     resave: false,
@@ -57,11 +52,37 @@ app.use(session({
     cookie: { maxAge: 2592000000 },
         store: new MongoStore(dbConfig);
 }));
+*/
 
-
+app.set('port', 3000);
+var server = http.createServer(app);
 app.use(express.static(__dirname));
 
+var store = new MongoStore('mongodb://localhost:27017/test', function(ret) {
 
+    server.listen(app.get('port'), "0.0.0.0", function () {
+    //addExistingImages();
+        console.log('Dbserver listening on port ' + app.get('port'));
+    });
+});
+
+
+
+app.use(session({
+    secret: '!pretOr-50-YihA',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 2592000000 },
+    store: store
+}));
+
+/*
+app.set('port', 3000);
+var server = http.createServer(app);
+server.listen(app.get('port'), "0.0.0.0", function () {
+    //addExistingImages();
+    console.log('Dbserver listening on port ' + app.get('port'));
+});*/
 
 //var files = fs.readdirSync(requiredDir);
 
@@ -81,14 +102,14 @@ app.use(express.static(__dirname));
         console.log('Dbserver listening on port ' + app.get('port'));
     });
 });*/
-
+/*
 app.set('port', 3000);
 var server = http.createServer(app);
 server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
     console.log('Dbserver listening on port ' + app.get('port'));
 });
-
+*/
 var auth = function(req, res, next) {
   if (req.session && req.session.user === "user" && req.session.admin) {
       console.log("auth next");
