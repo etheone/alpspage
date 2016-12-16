@@ -23,7 +23,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 2592000000 },
-    store: new MongoStore({'db': 'sessions' })
+    store: new MongoStore({'db': 'sessions', auto_reconnect: true })
 }));
 
 
