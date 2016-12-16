@@ -62,6 +62,14 @@ app.use(express.static(__dirname));
 
 
 
+mongoose.connect.on('connected', function() {
+    app.set('port', 3000);
+    var server = http.createServer(app);
+    server.listen(app.get('port'), "0.0.0.0", function () {
+        //addExistingImages();
+        console.log('Dbserver listening on port ' + app.get('port'));
+    });
+});
 
 app.set('port', 3000);
 var server = http.createServer(app);
