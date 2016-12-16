@@ -62,7 +62,7 @@ var options = {
     url: 'mongodb://localhost:27017/test',
     db: 'sessions'
 }
-var store = new MongoStore(options, function(ret) {
+var store = new MongoStore({mongooseConnection:mongooseDatabase.connections[0]}, function(ret) {
 
     server.listen(app.get('port'), "0.0.0.0", function () {
     //addExistingImages();
