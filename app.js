@@ -220,7 +220,12 @@ app.get('/tag-list', function(req, res) {
         if(err) {
 
         } else {
-            res.send(tags);
+            console.log(tags);
+            var tagsArray = [];
+            tags.forEach(tag => {
+                tagsArray.push(tag.tagName);
+            })
+            res.send(tagsArray.sort());
         }
     });
 
@@ -337,3 +342,11 @@ function rotateImage(imageName) {
         });
     });
 }
+
+
+function sortHash(param1, param2) {
+    console.log("IN SORTHASH");
+    console.log(param1);
+    console.log(param2);
+
+};

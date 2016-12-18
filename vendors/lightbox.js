@@ -36,13 +36,16 @@
     // options
     this.options = $.extend({}, this.constructor.defaults);
     this.option(options);
+    console.log("options");
+    console.log(options);
   }
+
 
   // Descriptions of all options available on the demo site:
   // http://lokeshdhakar.com/projects/lightbox2/index.html#options
   Lightbox.defaults = {
     albumLabel: 'Image %1 of %2',
-    alwaysShowNavOnTouchDevices: false,
+    alwaysShowNavOnTouchDevices: true,
     fadeDuration: 600,
     fitImagesInViewport: true,
     imageFadeDuration: 600,
@@ -51,7 +54,7 @@
     positionFromTop: 50,
     resizeDuration: 700,
     showImageNumberLabel: true,
-    wrapAround: false,
+    wrapAround: true,
     disableScrolling: false,
     /*
     Sanitize Title
@@ -61,7 +64,7 @@
     If the caption data is user submitted or from some other untrusted source, then set this to true
     to prevent xss and other injection attacks.
      */
-    sanitizeTitle: false
+    sanitizeTitle: true
   };
 
   Lightbox.prototype.option = function(options) {
