@@ -199,6 +199,9 @@
 				(tag);
 				loadTags(tag);
 			})).then(function() {
+				setTimeout(function() {
+					init_portfolio();
+				}, 500);
 				init_portfolio();
 			});
 
@@ -213,7 +216,7 @@
 			})).then(function() {
 				setTimeout(function() {
 					jQuery('#all-tag').click();
-				}, 400);
+				}, 800);
 				
 			});
 
