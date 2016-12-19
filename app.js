@@ -180,6 +180,7 @@ app.post('/file-upload', function (req, res) {
             var tempTag = req.body.tag;
             var tagToUse = tempTag.replace(/[^\wåäöÅÄÖ]/g,'');
             console.log("TAAAAAG");
+            tagToUse = tagToUse.toLowerCase();
             console.log(tempTag);
             console.log(tagToUse);
             Tag.findOne({ tagName: tagToUse }, function (err, tag) {
